@@ -2,55 +2,23 @@ import random
 from termcolor import *
 
 def guess(word, guess):
+    guessed = []
     count = 0
-    correct = 0
-    guess_list = []
-    incorrect = []
-    for letter in guess:
-        if letter == word[count]:
-            guess_list.append(colored(letter,'green'))
-            correct += 1
-        else:
-            guess_list.append(letter)
-        for item in word:
-            if letter == item:
-                incorrect.append(letter)
-        while True:
-            if len(incorrect) - 1 != count and len(incorrect) != 0:
-                incorrect.pop() 
-            else:
-                break
-        print(incorrect)
+    for char in guess:
+        temp = True
+        if char == word[count] and temp:
+            guessed.append(colored(char.upper(),"green"))
+            temp = False
+        elif temp:
+            guessed.append(char.upper())
+            temp = False
         count += 1
     
-    yellow = []
-    for x in set(guess):
-        for y in set(word):
-            if x == y:
-                yellow.append(x)
+    for char in guessed:
+        print(char,end="")
 
-    temp = []
-    for letter in yellow:
-        for right in guess_list:
-            if letter == right:
-                temp.append(letter)
-    for letter in set(temp):
-        yellow.remove(letter)
-
-    for letter in guess_list:
-        cprint(letter,end="")
-    if len(yellow) > 0:
-        print("\nLetters in the incorrect slot: ",end="")
-        for letter in yellow:
-            print(letter,end=", ")
-    elif correct != 5:
-        print("\nLetters in the incorrect slot: None.",end="")
-
-    if correct == 5:
-        return True
-    else:
-        return False
-
+    return False
+    
 def valid(word, words, valid):
     if len(word) != 5:
         print("Invalid length!")
@@ -70,8 +38,8 @@ def valid(word, words, valid):
 
 def game(words,allowed):
     word = random.choice(words)
-    count = 0
     print(word)
+    count = 0
     while True:
         choice = input("\nGuess: ")
         if valid(choice, words, allowed):
@@ -90,7 +58,7 @@ def game(words,allowed):
         return True
     else:
         return False
-    
+
 def main():
     word_file = open("words.txt","r")
     valid_file = open("valid.txt","r")
