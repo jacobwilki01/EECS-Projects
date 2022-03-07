@@ -1,0 +1,3 @@
+pyWordle fixes:
+- Need to add functionally to word count to count the guess as well, to prevent double typing letters.
+	- Example: word is ether, guess is trace. current functionally outputs TRACEE
