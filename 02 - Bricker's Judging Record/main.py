@@ -1,4 +1,4 @@
-file = open("mytable (25).csv","r")
+file = open("mytable (32).csv","r")
 
 lines = []
 for line in file:
